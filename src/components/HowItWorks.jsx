@@ -9,7 +9,7 @@ import {
 
 const HowItWorks = () => {
   return (
-    <section className="w-full bg-black text-white py-20 px-6 md:px-16 lg:px-24 text-center">
+    <section className="w-full h-300 bg-black text-white py-20 px-6 md:px-16 lg:px-24 text-center">
       {/* Header */}
       <h2 className="text-2xl md:text-3xl font-semibold mb-3">
         Drive with Kablux. Earn More. <span className="text-yellow-400">Live Free.</span>

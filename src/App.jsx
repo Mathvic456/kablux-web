@@ -22,7 +22,6 @@ function App() {
      <SafetyAndTestimonials/>
      <FaqSection/>
      <ContactAndDownload/>
-        
     </>
   )
 }

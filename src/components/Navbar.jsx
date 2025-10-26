@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logo from '../assets/Log.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,21 +10,38 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center py-4 px-4 sm:py-6 sm:px-6 md:px-10 lg:px-20 relative">
-      {/* Logo */}
-      <div className="text-yellow-500 font-semibold text-lg sm:text-xl">Kablux</div>
+      {/* Logo Image */}
+      <div className="flex items-center">
+        <img 
+          src={Logo}
+          alt="Kablux" 
+          className="h-8 w-auto sm:h-10 md:h-12 lg:h-14 object-contain hover:scale-105 transition-transform duration-300 cursor-pointer"
+          onError={(e) => {
+            // Fallback if image doesn't load
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'block';
+          }}
+        />
+        {/* Fallback text if image fails to load */}
+        <div className="text-yellow-500 font-semibold text-lg sm:text-xl hidden">
+          Kablux
+        </div>
+      </div>
 
       {/* Desktop Navigation */}
       <ul className="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium">
-        <li><a href="#" className="hover:text-yellow-500 transition-colors">Become a Fleet Owner</a></li>
-        <li><a href="#" className="hover:text-yellow-500 transition-colors">Cooperate Account</a></li>
-        <li><a href="#" className="hover:text-yellow-500 transition-colors">How it works</a></li>
-        <li><a href="#" className="hover:text-yellow-500 transition-colors">Why choose us</a></li>
+        <li><a href="#" className="hover:text-yellow-500 transition-colors duration-300">Become a Fleet Owner</a></li>
+        <li><a href="#" className="hover:text-yellow-500 transition-colors duration-300">Cooperate Account</a></li>
+        <li><a href="#" className="hover:text-yellow-500 transition-colors duration-300">How it works</a></li>
+        <li><a href="#" className="hover:text-yellow-500 transition-colors duration-300">Why choose us</a></li>
       </ul>
 
       {/* Desktop Buttons */}
       <div className="hidden md:flex items-center space-x-4">
-        <button className="text-sm text-gray-800 hover:text-black transition-colors">Sign in</button>
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm px-4 py-2 rounded-md transition-colors">
+        <button className="text-sm text-gray-800 hover:text-yellow-500 hover:bg-yellow-50 px-4 py-2 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 border border-transparent hover:border-yellow-200">
+          Sign in
+        </button>
+        <button className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm px-4 py-2 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-yellow-200/50 border border-yellow-400 hover:border-yellow-500">
           Sign up
         </button>
       </div>
@@ -34,9 +52,9 @@ const Navbar = () => {
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
-        <span className={`block h-0.5 w-6 bg-current transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-        <span className={`block h-0.5 w-6 bg-current transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-        <span className={`block h-0.5 w-6 bg-current transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+        <span className={`block h-0.5 w-6 bg-current transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+        <span className={`block h-0.5 w-6 bg-current transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+        <span className={`block h-0.5 w-6 bg-current transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
       </button>
 
       {/* Mobile Menu */}
@@ -45,17 +63,17 @@ const Navbar = () => {
       }`}>
         <div className="px-4 py-6 space-y-4">
           <ul className="space-y-4 text-center">
-            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors" onClick={() => setIsMenuOpen(false)}>Become a Fleet Owner</a></li>
-            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors" onClick={() => setIsMenuOpen(false)}>Cooperate Account</a></li>
-            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors" onClick={() => setIsMenuOpen(false)}>How it works</a></li>
-            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors" onClick={() => setIsMenuOpen(false)}>Why choose us</a></li>
+            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Become a Fleet Owner</a></li>
+            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Cooperate Account</a></li>
+            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>How it works</a></li>
+            <li><a href="#" className="block py-2 hover:text-yellow-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Why choose us</a></li>
           </ul>
           
           <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200">
-            <button className="text-gray-800 hover:text-black py-2 transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <button className="text-gray-800 hover:text-yellow-500 hover:bg-yellow-50 py-3 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 border border-transparent hover:border-yellow-200 mx-4" onClick={() => setIsMenuOpen(false)}>
               Sign in
             </button>
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-white py-2 rounded-md transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <button className="bg-yellow-400 hover:bg-yellow-500 text-white py-3 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-yellow-200/50 border border-yellow-400 hover:border-yellow-500 mx-4" onClick={() => setIsMenuOpen(false)}>
               Sign up
             </button>
           </div>

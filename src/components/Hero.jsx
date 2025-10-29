@@ -3,6 +3,8 @@ import Button from "./Button";
 import PixelCar from "./PixelCar";
 import SocialIcons from "./SocialIcons";
 
+
+
 const Hero = () => {
   return (
     <section className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 xs:px-6 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20 max-w-7xl mx-auto">

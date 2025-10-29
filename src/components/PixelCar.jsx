@@ -1,12 +1,15 @@
 import React from "react";
 import Car from '../assets/Car.png';
+import Img from '../assets/Img.png'
+import ImgTwo from '../assets/ImgTwo.png'
+import ImgThree from '../assets/ImgThree.png'
 
 const PixelCar = () => {
   return (
     <div className="flex flex-col items-center w-full">
       {/* Car Image */}
       <img
-        src={Car}
+        src={ImgThree}
         alt="Kablux Car"
         className="w-48 xs:w-56 sm:w-64 md:w-80 lg:w-96 xl:w-[400px] object-contain transition-all duration-300"
       />

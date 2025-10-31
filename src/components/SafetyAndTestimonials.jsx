@@ -8,33 +8,35 @@ const SafetyAndTestimonials = () => {
     <section className="w-full bg-white py-20 px-6 md:px-16 lg:px-24">
       {/* Safety Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 mb-24">
-        <div>
-          <h2 className="text-xl font-semibold mb-2 flex items-center gap-2">
-            <FaShieldAlt className="text-yellow-500" />
-            Your Safety. Our Priority.
-          </h2>
-          <div className="w-16 h-1 bg-yellow-400 rounded mb-6"></div>
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-xl font-semibold mb-2 flex items-center gap-2">
+              <FaShieldAlt className="text-yellow-500" />
+              Your Safety. Our Priority.
+            </h2>
+            <div className="w-16 h-1 bg-yellow-400 rounded mb-6"></div>
+          </div>
 
-          <ul className="space-y-3 text-gray-700">
-            <li className="flex items-start gap-2">
-              <FaCheckCircle className="text-green-500 mt-1" />
-              Verified drivers with background checks.
+          <ul className="space-y-4 text-gray-700">
+            <li className="flex items-start gap-3">
+              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+              <span>Verified drivers with background checks.</span>
             </li>
-            <li className="flex items-start gap-2">
-              <FaCheckCircle className="text-green-500 mt-1" />
-              In-app SOS button with instant emergency alerts.
+            <li className="flex items-start gap-3">
+              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+              <span>In-app SOS button with instant emergency alerts.</span>
             </li>
-            <li className="flex items-start gap-2">
-              <FaCheckCircle className="text-green-500 mt-1" />
-              Trip sharing with friends and family.
+            <li className="flex items-start gap-3">
+              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+              <span>Trip sharing with friends and family.</span>
             </li>
-            <li className="flex items-start gap-2">
-              <FaCheckCircle className="text-green-500 mt-1" />
-              Live GPS monitoring for every ride.
+            <li className="flex items-start gap-3">
+              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+              <span>Live GPS monitoring for every ride.</span>
             </li>
-            <li className="flex items-start gap-2">
-              <FaCheckCircle className="text-green-500 mt-1" />
-              Special security rides with convoy or armed escort when needed.
+            <li className="flex items-start gap-3">
+              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+              <span>Special security rides with convoy or armed escort when needed.</span>
             </li>
           </ul>
         </div>
@@ -43,7 +45,7 @@ const SafetyAndTestimonials = () => {
           <img
             src={Driver}
             alt="Happy driver"
-            className="w-full max-w-md h-64 object-cover rounded-2xl shadow"
+            className="w-full max-w-md h-auto object-cover rounded-2xl shadow-lg"
           />
         </div>
       </div>

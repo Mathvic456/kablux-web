@@ -13,18 +13,125 @@ const ContactAndDownload = () => {
     email: "",
     message: ""
   });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    message: false
+  });
+
+  // Function to validate name (no special characters allowed)
+  const validateName = (name) => {
+    // Regular expression that allows only letters, spaces, hyphens, and apostrophes
+    const nameRegex = /^[a-zA-Z\s\-']+$/;
+    
+    if (!name.trim()) {
+      return "Name is required";
+    } else if (!nameRegex.test(name)) {
+      return "Name should only contain letters, spaces, hyphens, and apostrophes";
+    } else if (name.length < 2) {
+      return "Name should be at least 2 characters long";
+    }
+    return "";
+  };
+
+  // Function to validate email
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      return "Email is required";
+    } else if (!emailRegex.test(email)) {
+      return "Please enter a valid email address";
+    }
+    return "";
+  };
+
+  // Function to validate message
+  const validateMessage = (message) => {
+    if (!message.trim()) {
+      return "Message is required";
+    } else if (message.length < 10) {
+      return "Message should be at least 10 characters long";
+    }
+    return "";
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData(prevState => ({
       ...prevState,
       [name]: value
     }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prevState => ({
+        ...prevState,
+        [name]: ""
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    
+    setTouched(prevState => ({
+      ...prevState,
+      [name]: true
+    }));
+
+    // Validate the field on blur
+    let error = "";
+    switch (name) {
+      case "name":
+        error = validateName(value);
+        break;
+      case "email":
+        error = validateEmail(value);
+        break;
+      case "message":
+        error = validateMessage(value);
+        break;
+      default:
+        break;
+    }
+
+    setErrors(prevState => ({
+      ...prevState,
+      [name]: error
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: validateName(formData.name),
+      email: validateEmail(formData.email),
+      message: validateMessage(formData.message)
+    };
+
+    setErrors(newErrors);
+    setTouched({
+      name: true,
+      email: true,
+      message: true
+    });
+
+    return !newErrors.name && !newErrors.email && !newErrors.message;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+
     // Set loading state
     setIsLoading(true);
     
@@ -40,11 +147,21 @@ const ContactAndDownload = () => {
     // Show the modal
     setIsModalOpen(true);
     
-    // Reset form
+    // Reset form and validation states
     setFormData({
       name: "",
       email: "",
       message: ""
+    });
+    setErrors({
+      name: "",
+      email: "",
+      message: ""
+    });
+    setTouched({
+      name: false,
+      email: false,
+      message: false
     });
   };
 
@@ -60,37 +177,70 @@ const ContactAndDownload = () => {
 
         <div className="grid md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
           {/* Form */}
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              required
-              disabled={isLoading}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              required
-              disabled={isLoading}
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleInputChange}
-              rows="4"
-              className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              required
-              disabled={isLoading}
-            ></textarea>
+          <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={`w-full border rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                  errors.name && touched.name 
+                    ? "border-red-500" 
+                    : "border-gray-300"
+                }`}
+                required
+                disabled={isLoading}
+              />
+              {errors.name && touched.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
+            </div>
+            
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={`w-full border rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                  errors.email && touched.email 
+                    ? "border-red-500" 
+                    : "border-gray-300"
+                }`}
+                required
+                disabled={isLoading}
+              />
+              {errors.email && touched.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
+            </div>
+            
+            <div>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                rows="4"
+                className={`w-full border rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                  errors.message && touched.message 
+                    ? "border-red-500" 
+                    : "border-gray-300"
+                }`}
+                required
+                disabled={isLoading}
+              ></textarea>
+              {errors.message && touched.message && (
+                <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+              )}
+            </div>
+            
             <button
               type="submit"
               disabled={isLoading}

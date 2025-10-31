@@ -49,7 +49,7 @@ const SafetyAndTestimonials = () => {
       </div>
 
       {/* Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> */}
     </section>
   );
 };

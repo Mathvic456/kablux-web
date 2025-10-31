@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/Log.png";
+import LogTwo from "../assets/LogTwo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -143,9 +144,9 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center">
         <img
-          src={Logo}
+          src={LogTwo}
           alt="Kablux"
-          className="h-8 w-auto sm:h-10 md:h-12 lg:h-14 object-contain hover:scale-105 transition-transform duration-300 cursor-pointer"
+          className="h-8 w-auto sm:h-10 md:h-12 lg:h-22 object-contain hover:scale-105 transition-transform duration-300 cursor-pointer"
           onError={(e) => {
             e.target.style.display = "none";
             e.target.nextSibling.style.display = "block";

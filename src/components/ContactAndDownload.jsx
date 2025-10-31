@@ -322,64 +322,95 @@ const ContactAndDownload = () => {
 
       {/* DOWNLOAD SECTION */}
       <div className="bg-black text-white py-20 px-6 md:px-16 lg:px-24">
-        <div className="grid md:grid-cols-2 items-center gap-10 max-w-6xl mx-auto">
-          {/* Left Text */}
-          <div>
-            <p className="uppercase text-yellow-400 text-sm mb-2">Download</p>
-            <h2 className="text-3xl font-semibold mb-3 leading-tight">
-              Download Kablux App for <span className="text-yellow-400">FREE</span>
-            </h2>
-            <p className="text-gray-300 mb-6">
-              For faster, easier booking and exclusive deals.
-            </p>
+        <div className="grid md:grid-cols-2 items-center gap-12 max-w-6xl mx-auto">
+          {/* Left Text Content */}
+          <div className="flex flex-col justify-center space-y-6 text-left">
+            <div>
+              {/* <p className="uppercase text-yellow-400 text-sm font-medium mb-3 tracking-wide">
+                Download
+              </p> */}
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                Download Kablux App for <span className="text-yellow-400">FREE</span>
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-2">
+                For faster, easier booking and exclusive deals.
+              </p>
+            </div>
 
-            <div className="flex items-center gap-4">
-              <img
-                src={Google}
-                alt="Google Play"
-                className="w-32 cursor-pointer"
-              />
-              <img
-                src={Apple}
-                alt="App Store"
-                className="w-32 cursor-pointer"
-              />
+            {/* Download Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+              <a 
+                href="#" 
+                className="inline-flex justify-center transition-transform hover:scale-105 active:scale-95"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                  alt="Download on Google Play"
+                  className="h-12 sm:h-14 md:h-16"
+                />
+              </a>
+              <a 
+                href="#" 
+                className="inline-flex justify-center transition-transform hover:scale-105 active:scale-95"
+              >
+                <img
+                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                  alt="Download on the App Store"
+                  className="h-12 sm:h-14 md:h-16"
+                />
+              </a>
             </div>
           </div>
 
           {/* App Mockup */}
           <div className="flex justify-center md:justify-end">
-            <img
-              src={Phone}
-              alt="Kablux App"
-              className="w-72 md:w-80"
-            />
+            <div className="relative">
+              <img
+                src={Phone}
+                alt="Kablux App"
+                className="w-64 sm:w-72 md:w-80 lg:w-96 transform hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
         </div>
 
         {/* Support Info */}
-        <div className="text-center text-sm text-gray-400 mt-16">
-          Need help riding or driving? Please call{" "}
-          <span className="text-yellow-400 font-semibold">+233-444-9999</span>
+        <div className="text-center mt-16 pt-8 border-t border-gray-800">
+          <p className="text-gray-400 text-sm md:text-base">
+            Need help riding or driving? Please call{" "}
+            <span className="text-yellow-400 font-semibold">+234-602-61407</span>
+          </p>
         </div>
       </div>
 
       {/* FOOTER */}
-      <footer className="bg-black text-white border-t border-gray-800 py-6 px-6 md:px-16 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Logo */}
-        <h3 className="text-yellow-400 font-bold text-lg">Kablux</h3>
+      <footer className="bg-black text-white border-t border-gray-800 py-8 px-6 md:px-16 lg:px-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo */}
+            <h3 className="text-yellow-400 font-bold text-xl">Kablux</h3>
 
-        {/* Support text */}
-        <p className="text-gray-400 text-sm">
-          24/7 Customer Support Available
-        </p>
+            {/* Support text */}
+            <p className="text-gray-400 text-sm md:text-base text-center">
+              24/7 Customer Support Available
+            </p>
 
-        {/* Social Links */}
-        <div className="flex items-center gap-4 text-gray-300">
-          <a href="#" className="hover:text-yellow-400"><FaFacebookF /></a>
-          <a href="#" className="hover:text-yellow-400"><FaTwitter /></a>
-          <a href="#" className="hover:text-yellow-400"><FaInstagram /></a>
-          <a href="#" className="hover:text-yellow-400"><FaLinkedinIn /></a>
+            {/* Social Links */}
+            <div className="flex items-center gap-6 text-gray-300">
+              <a href="" className="hover:text-yellow-400 transition-colors duration-200">
+                <FaFacebookF size={18} />
+              </a>
+              <a href="#" className="hover:text-yellow-400 transition-colors duration-200">
+                <FaTwitter size={18} />
+              </a>
+              <a href="https://www.instagram.com/kablux_nigeria?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="hover:text-yellow-400 transition-colors duration-200">
+                <FaInstagram size={18} />
+              </a>
+              <a href="#" className="hover:text-yellow-400 transition-colors duration-200">
+                <FaLinkedinIn size={18} />
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </section>

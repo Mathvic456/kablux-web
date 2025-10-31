@@ -5,7 +5,7 @@ const SocialIcons = () => {
   const icons = [
     { icon: <FaFacebookF />, link: "#", label: "Facebook" },
     { icon: <FaTwitter />, link: "#", label: "Twitter" },
-    { icon: <FaInstagram />, link: "#", label: "Instagram" },
+    { icon: <FaInstagram />, link: "https://www.instagram.com/kablux_nigeria?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
     { icon: <FaLinkedinIn />, link: "#", label: "LinkedIn" },
   ];
 

@@ -6,33 +6,109 @@ import SocialIcons from "./SocialIcons";
 const Hero = () => {
   const [isRideModalOpen, setIsRideModalOpen] = useState(false);
   const [isDriveModalOpen, setIsDriveModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [rideEmail, setRideEmail] = useState("");
+  const [driveEmail, setDriveEmail] = useState("");
+  const [rideLoading, setRideLoading] = useState(false);
+  const [driveLoading, setDriveLoading] = useState(false);
+  const [rideSubmitted, setRideSubmitted] = useState(false);
+  const [driveSubmitted, setDriveSubmitted] = useState(false);
+  const [errors, setErrors] = useState({
+    rideEmail: "",
+    driveEmail: ""
+  });
 
-  const handleJoinWaitlist = async (type) => {
-    if (!email) return;
-    
-    setIsLoading(true);
+  // Email validation function
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      return "Email is required";
+    } else if (!emailRegex.test(email)) {
+      return "Please enter a valid email address";
+    }
+    return "";
+  };
+
+  const handleJoinWaitlist = async (type, email) => {
+    // Validate email
+    const emailError = validateEmail(email);
+    if (emailError) {
+      setErrors(prev => ({
+        ...prev,
+        [`${type}Email`]: emailError
+      }));
+      return;
+    }
+
+    // Set loading state based on type
+    if (type === 'ride') {
+      setRideLoading(true);
+    } else {
+      setDriveLoading(true);
+    }
     
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     console.log(`Joined waitlist for ${type} with email:`, email);
     
-    setIsLoading(false);
-    setIsSubmitted(true);
+    // Reset loading state
+    if (type === 'ride') {
+      setRideLoading(false);
+      setRideSubmitted(true);
+    } else {
+      setDriveLoading(false);
+      setDriveSubmitted(true);
+    }
     
     // Reset after success
     setTimeout(() => {
-      setEmail("");
-      setIsSubmitted(false);
       if (type === 'ride') {
+        setRideEmail("");
+        setRideSubmitted(false);
         setIsRideModalOpen(false);
       } else {
+        setDriveEmail("");
+        setDriveSubmitted(false);
         setIsDriveModalOpen(false);
       }
+      // Clear errors
+      setErrors({
+        rideEmail: "",
+        driveEmail: ""
+      });
     }, 2000);
+  };
+
+  const handleEmailChange = (type, value) => {
+    if (type === 'ride') {
+      setRideEmail(value);
+    } else {
+      setDriveEmail(value);
+    }
+    
+    // Clear error when user starts typing
+    if (errors[`${type}Email`]) {
+      setErrors(prev => ({
+        ...prev,
+        [`${type}Email`]: ""
+      }));
+    }
+  };
+
+  const getCurrentEmail = (type) => {
+    return type === 'ride' ? rideEmail : driveEmail;
+  };
+
+  const getCurrentLoading = (type) => {
+    return type === 'ride' ? rideLoading : driveLoading;
+  };
+
+  const getCurrentSubmitted = (type) => {
+    return type === 'ride' ? rideSubmitted : driveSubmitted;
+  };
+
+  const getCurrentError = (type) => {
+    return type === 'ride' ? errors.rideEmail : errors.driveEmail;
   };
 
   const WaitlistModal = ({ isOpen, onClose, type }) => {
@@ -43,12 +119,26 @@ const Hero = () => {
       ? "Be the first to ride with Kablux when we launch in your city!"
       : "Join our driver community and be the first to earn with Kablux!";
 
+    const currentEmail = getCurrentEmail(type);
+    const currentLoading = getCurrentLoading(type);
+    const currentSubmitted = getCurrentSubmitted(type);
+    const currentError = getCurrentError(type);
+
+    const handleModalClose = () => {
+      // Clear errors and reset states when closing modal
+      setErrors(prev => ({
+        ...prev,
+        [`${type}Email`]: ""
+      }));
+      onClose();
+    };
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
           {/* Close Button */}
           <button
-            onClick={onClose}
+            onClick={handleModalClose}
             className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,27 +171,34 @@ const Hero = () => {
               Join the waitlist to be the first to hear when we launch!
             </p>
 
-            {!isSubmitted ? (
+            {!currentSubmitted ? (
               <>
                 {/* Email Input */}
                 <div className="mb-4">
                   <input
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={currentEmail}
+                    onChange={(e) => handleEmailChange(type, e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                    disabled={isLoading}
+                    className={`w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent ${
+                      currentError ? "border-red-500" : "border-gray-300"
+                    }`}
+                    disabled={currentLoading}
+                    autoComplete="email"
+                    inputMode="email"
                   />
+                  {currentError && (
+                    <p className="text-red-500 text-xs mt-1 text-left">{currentError}</p>
+                  )}
                 </div>
                 
                 {/* Join Waitlist Button */}
                 <button
-                  onClick={() => handleJoinWaitlist(type)}
-                  disabled={!email || isLoading}
+                  onClick={() => handleJoinWaitlist(type, currentEmail)}
+                  disabled={!currentEmail || currentLoading}
                   className="w-full bg-yellow-400 hover:bg-yellow-500 disabled:bg-yellow-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2"
                 >
-                  {isLoading ? (
+                  {currentLoading ? (
                     <>
                       <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

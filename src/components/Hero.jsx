@@ -133,6 +133,11 @@ const Hero = () => {
       onClose();
     };
 
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      handleJoinWaitlist(type, currentEmail);
+    };
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
@@ -140,6 +145,7 @@ const Hero = () => {
           <button
             onClick={handleModalClose}
             className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
+            type="button"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -172,7 +178,7 @@ const Hero = () => {
             </p>
 
             {!currentSubmitted ? (
-              <>
+              <form onSubmit={handleSubmit}>
                 {/* Email Input */}
                 <div className="mb-4">
                   <input
@@ -186,6 +192,7 @@ const Hero = () => {
                     disabled={currentLoading}
                     autoComplete="email"
                     inputMode="email"
+                    id={`${type}-email-input`}
                   />
                   {currentError && (
                     <p className="text-red-500 text-xs mt-1 text-left">{currentError}</p>
@@ -194,7 +201,7 @@ const Hero = () => {
                 
                 {/* Join Waitlist Button */}
                 <button
-                  onClick={() => handleJoinWaitlist(type, currentEmail)}
+                  type="submit"
                   disabled={!currentEmail || currentLoading}
                   className="w-full bg-yellow-400 hover:bg-yellow-500 disabled:bg-yellow-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2"
                 >
@@ -210,7 +217,7 @@ const Hero = () => {
                     "Join Waitlist"
                   )}
                 </button>
-              </>
+              </form>
             ) : (
               /* Success State */
               <div className="py-4">

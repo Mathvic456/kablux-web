@@ -169,6 +169,11 @@ const ContactAndDownload = () => {
     setIsModalOpen(false);
   };
 
+  // Function to handle phone number click
+  const handlePhoneClick = () => {
+    window.open('tel:+23460261407');
+  };
+
   return (
     <section className="w-full">
       {/* CONTACT SECTION */}
@@ -326,9 +331,6 @@ const ContactAndDownload = () => {
           {/* Left Text Content */}
           <div className="flex flex-col justify-center space-y-6 text-left">
             <div>
-              {/* <p className="uppercase text-yellow-400 text-sm font-medium mb-3 tracking-wide">
-                Download
-              </p> */}
               <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
                 Download Kablux App for <span className="text-yellow-400">FREE</span>
               </h2>
@@ -337,8 +339,8 @@ const ContactAndDownload = () => {
               </p>
             </div>
 
-            {/* Download Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            {/* Download Buttons - Always side by side */}
+            <div className="flex flex-row gap-4 mt-4">
               <a 
                 href="#" 
                 className="inline-flex justify-center transition-transform hover:scale-105 active:scale-95"
@@ -378,7 +380,12 @@ const ContactAndDownload = () => {
         <div className="text-center mt-16 pt-8 border-t border-gray-800">
           <p className="text-gray-400 text-sm md:text-base">
             Need help riding or driving? Please call{" "}
-            <span className="text-yellow-400 font-semibold">+234-602-61407</span>
+            <button 
+              onClick={handlePhoneClick}
+              className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-200 underline cursor-pointer"
+            >
+              +234-602-61407
+            </button>
           </p>
         </div>
       </div>
@@ -397,7 +404,7 @@ const ContactAndDownload = () => {
 
             {/* Social Links */}
             <div className="flex items-center gap-6 text-gray-300">
-              <a href="" className="hover:text-yellow-400 transition-colors duration-200">
+              <a href="#" className="hover:text-yellow-400 transition-colors duration-200">
                 <FaFacebookF size={18} />
               </a>
               <a href="#" className="hover:text-yellow-400 transition-colors duration-200">

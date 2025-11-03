@@ -6,7 +6,7 @@ const SocialIcons = () => {
     { icon: <FaFacebookF />, link: "#", label: "Facebook" },
     { icon: <FaTwitter />, link: "#", label: "Twitter" },
     { icon: <FaInstagram />, link: "https://www.instagram.com/kablux_nigeria?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
-    { icon: <FaLinkedinIn />, link: "#", label: "LinkedIn" },
+    { icon: <FaLinkedinIn />, link: "https://www.linkedin.com/company/kablux-nigeria/", label: "LinkedIn" },
   ];
 
   return (

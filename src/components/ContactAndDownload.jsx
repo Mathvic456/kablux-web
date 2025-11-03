@@ -382,7 +382,7 @@ const ContactAndDownload = () => {
             Need help riding or driving? Please call{" "}
             <button 
               onClick={handlePhoneClick}
-              className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-200 underline cursor-pointer"
+              className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-200 cursor-pointer"
             >
               +234-602-61407
             </button>

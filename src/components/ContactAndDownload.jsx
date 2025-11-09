@@ -171,7 +171,7 @@ const ContactAndDownload = () => {
 
   // Function to handle phone number click
   const handlePhoneClick = () => {
-    window.open('tel:+23460261407');
+    window.open('tel:+2348060261407');v
   };
 
   return (
@@ -384,7 +384,7 @@ const ContactAndDownload = () => {
               onClick={handlePhoneClick}
               className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-200 cursor-pointer"
             >
-              +234-602-61407
+              +234-806-026-1407
             </button>
           </p>
         </div>
